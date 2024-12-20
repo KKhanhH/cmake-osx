@@ -1,0 +1,33 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "ci",
+      "description": "Release build for CI",
+      "hidden": false,
+      "generator": "Ninja",
+      "binaryDir": "ci-build/${presetName}",
+      "installDir": "release/${presetName}",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/triplets"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "build",
+      "description": "BUILD",
+      "configurePreset": "ci",
+      "targets": [
+        "install"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+name: test
+on:
+  push:
+    branches:
+    - "*"
+  workflow_dispatch: 
+    
+env:
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+
+
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ macos-latest }}
+    env:
+      TRIPLET: ${{ arm64-osx-ci }}
+      vcpkgCommitId: '0f88ecb8528605f91980b90a2c5bad88e3cb565f'
+      PresetName: ci
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ needs.lint.outputs.commitid }}
+
+    - uses: lukka/get-cmake@latest
+    - name: Setup vcpkg
+      uses: lukka/run-vcpkg@v11
+      id: runvcpkg
+      with:
+        vcpkgDirectory: '${{ runner.workspace }}/build/vcpkg'
+        vcpkgGitCommitId: '${{ env.vcpkgCommitId }}'
+        vcpkgJsonGlob: '**/vcpkg.json'
+
+    - name: Run CMake with vcpkg.json manifest
+      uses: lukka/run-cmake@v10
+      with:
+        cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
+        configurePreset: ${{ env.PresetName }}
+        buildPreset: ${{ env.PresetName }}
+        configurePresetAdditionalArgs: >-
+          [
+            '-DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_DEFAULT_TRIPLET }}',
+            '-DVCPKG_HOST_TRIPLET=${{ env.VCPKG_DEFAULT_TRIPLET }}',
+          ]
+    - name: "Print out cmake install script"
+      if: always() && contains(matrix.os_name, 'macos')
+      run: cat ${{ github.workspace }}/ci-build/ci/cmake_install.cmake
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4.1.0
+      with:
+        path: test-filie-${{ github.run_number }}-${{ github.sha }}.zip
+        name: release
