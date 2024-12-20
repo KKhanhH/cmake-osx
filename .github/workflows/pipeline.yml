@@ -21,6 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: lukka/get-cmake@latest
+    - run: brew install nasm
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v11
       id: runvcpkg
@@ -28,7 +29,7 @@ jobs:
         vcpkgDirectory: '${{ runner.workspace }}/build/vcpkg'
         vcpkgGitCommitId: '${{ env.vcpkgCommitId }}'
         vcpkgJsonGlob: '**/vcpkg.json'
-
+    
     - name: Run CMake with vcpkg.json manifest
       uses: lukka/run-cmake@v10
       with:
