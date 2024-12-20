@@ -34,7 +34,7 @@ jobs:
       with:
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
         configurePreset: ${{ env.PresetName }}
-        buildPreset: ${{ env.PresetName }}
+        buildPreset: build
         configurePresetAdditionalArgs: >-
           [
             '-DVCPKG_TARGET_TRIPLET=${{ env.TRIPLET }}',
