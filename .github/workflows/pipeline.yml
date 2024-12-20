@@ -20,9 +20,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-      with:
-        ref: ${{ needs.lint.outputs.commitid }}
-
     - uses: lukka/get-cmake@latest
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v11
@@ -40,11 +37,11 @@ jobs:
         buildPreset: ${{ env.PresetName }}
         configurePresetAdditionalArgs: >-
           [
-            '-DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_DEFAULT_TRIPLET }}',
-            '-DVCPKG_HOST_TRIPLET=${{ env.VCPKG_DEFAULT_TRIPLET }}',
+            '-DVCPKG_TARGET_TRIPLET=${{ env.TRIPLET }}',
+            '-DVCPKG_HOST_TRIPLET=${{ env.TRIPLET }}',
           ]
     - name: "Print out cmake install script"
-      if: always() && contains(matrix.os_name, 'macos')
+      if: always()
       run: cat ${{ github.workspace }}/ci-build/ci/cmake_install.cmake
     - name: Upload Artifact
       uses: actions/upload-artifact@v4.1.0
