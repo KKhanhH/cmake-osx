@@ -18,9 +18,9 @@ target_link_libraries(test
   ${OPENAL_LIBRARY}
   ${SDL2_LIBRARIES}
   ZLIB::ZLIB
-  ogg::ogg
-  Vorbis::Vorbis
-  vorbis::vorbisfile
+  Ogg::ogg
+  Vorbis::vorbis
+  Vorbis::vorbisfile
   ${WebP_LIBRARIES}
   avcpp::avcpp
   avcpp::FFmpeg
