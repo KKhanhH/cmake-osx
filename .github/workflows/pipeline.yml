@@ -44,26 +44,13 @@ jobs:
         cp src/libatrac9.h ../include/libatrac9/
         popd
         echo "LIBATRAC9DIR=${{ github.workspace }}/vendor/LibAtrac9" >> $GITHUB_ENV
-        find "${{ github.workspace }}/vendor/LibAtrac9"
-    - name: Setup vcpkg
-      uses: lukka/run-vcpkg@v11
-      id: runvcpkg
-      with:
-        vcpkgDirectory: '${{ runner.workspace }}/build/vcpkg'
-        vcpkgGitCommitId: '${{ env.vcpkgCommitId }}'
-        vcpkgJsonGlob: '**/vcpkg.json'
-    
+        find "${{ github.workspace }}/vendor/LibAtrac9"    
     - name: Run CMake with vcpkg.json manifest
       uses: lukka/run-cmake@v10
       with:
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
         configurePreset: ${{ env.PresetName }}
         buildPreset: build
-        configurePresetAdditionalArgs: >-
-          [
-            '-DVCPKG_TARGET_TRIPLET=${{ env.TRIPLET }}',
-            '-DVCPKG_HOST_TRIPLET=${{ env.TRIPLET }}',
-          ]
     - name: "Print out cmake install script"
       if: always()
       run: cat ${{ github.workspace }}/ci-build/ci/cmake_install.cmake
