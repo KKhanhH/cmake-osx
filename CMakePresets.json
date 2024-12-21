@@ -13,10 +13,8 @@
       "generator": "Ninja",
       "binaryDir": "ci-build/${presetName}",
       "installDir": "release/${presetName}",
-      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/triplets"
       }
     }
   ],
