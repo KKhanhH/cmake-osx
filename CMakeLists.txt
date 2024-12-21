@@ -11,6 +11,7 @@ find_package(Vorbis REQUIRED)
 find_package(WebP REQUIRED)
 find_package(avcpp CONFIG REQUIRED)
 find_package(Vulkan REQUIRED)
+find_package(Libatrac9 MODULE REQUIRED) 
 
 target_link_libraries(test 
   SDL2::SDL2
@@ -25,6 +26,7 @@ target_link_libraries(test
   avcpp::avcpp
   avcpp::FFmpeg
   ${Vulkan_LIBRARIES}
+  ${LIBATRAC9_LIBRARY} 
 )
 
 if(WIN32)
