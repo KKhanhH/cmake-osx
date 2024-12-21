@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 project("test")
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}) 
+
 add_executable(test main.cpp)
 
 find_package(SDL2 REQUIRED)
