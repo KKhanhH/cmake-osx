@@ -1,4 +1,4 @@
-Vname: test
+name: test
 on:
   push:
     branches:
