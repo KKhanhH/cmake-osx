@@ -1,2 +1,2 @@
-# cmake-osx-vcpkg
+# cmake-osx
 test cmake repo
