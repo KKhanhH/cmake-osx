@@ -1,4 +1,4 @@
-name: test
+Vname: test
 on:
   push:
     branches:
@@ -14,8 +14,6 @@ jobs:
     name: Build
     runs-on: macos-latest
     env:
-      TRIPLET: arm64-osx-ci
-      vcpkgCommitId: '0f88ecb8528605f91980b90a2c5bad88e3cb565f'
       PresetName: ci
 
     steps:
@@ -45,7 +43,7 @@ jobs:
         popd
         echo "LIBATRAC9DIR=${{ github.workspace }}/vendor/LibAtrac9" >> $GITHUB_ENV
         find "${{ github.workspace }}/vendor/LibAtrac9"    
-    - name: Run CMake with vcpkg.json manifest
+    - name: Run CMake 
       uses: lukka/run-cmake@v10
       with:
         cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
