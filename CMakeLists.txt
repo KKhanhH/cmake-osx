@@ -6,7 +6,7 @@ add_executable(executable_program main.cpp)
 
 find_package(Libatrac9 MODULE REQUIRED) 
 
-target_link_libraries(test 
+target_link_libraries(executable_program 
   ${LIBATRAC9_LIBRARY} 
 )
 
