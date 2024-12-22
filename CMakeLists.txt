@@ -14,7 +14,7 @@ if(WIN32)
   install(TARGETS executable_program RUNTIME DESTINATION .)
   x_vcpkg_install_local_dependencies(TARGETS executable_program DESTINATION .)
 else()
-  install(TARGETS osx_project_test RUNTIME_DEPENDENCIES
+  install(TARGETS executable_program RUNTIME_DEPENDENCIES
     RUNTIME DESTINATION .
     FRAMEWORK DESTINATION ./lib
     LIBRARY DESTINATION .
