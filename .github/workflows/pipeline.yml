@@ -29,6 +29,7 @@ jobs:
         cd LibAtrac9/C
         if [[ "${{ runner.os }}" == "macOS" ]]; then
           sed -i '' -e 's/,--version-script=libatrac9.version//g' Makefile
+          sed -i '' -e 's/.so/.dylib/g' Makefile
         fi
         if [ -z "${CC}" ]; then
           make
